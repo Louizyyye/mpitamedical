@@ -3,53 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mpita Care</title>
+    <title>Login - Mpita Sense</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: url('/mnt/data/DALL·E 2025-02-12 22.53.08 - A futuristic logo for 'Mpita' that symbolizes the dangers of radiation, the versatility of magnetism, and the therapeutic nature of sound. The logo sh.webp') no-repeat center center fixed;
+            background-size: cover;
+        }
+    </style>
 </head>
-<body class="bg-gray-200 font-roboto">
-    <nav class="bg-blue-600 text-white p-4 flex justify-between">
-        <a href="index.html" class="font-bold">Home</a>
-        <div>
-            <a href="healthstaff.html" class="mx-2">Health Staff</a>
-            <a href="patients.html" class="mx-2">Patients</a>
-            <a href="admin.html" class="mx-2">Administrator</a>
-            <a href="clinic.html" class="mx-2">Hospital/Clinic</a>
-            <a href="login.html" class="mx-2">Login</a>
+<body class="font-roboto flex items-center justify-center h-screen">
+    <div class="bg-white bg-opacity-80 p-8 rounded-lg shadow-lg w-96">
+        <div class="flex justify-center mb-4">
+            <img src="/mnt/data/DALL·E 2025-02-12 22.53.08 - A futuristic logo for 'Mpita' that symbolizes the dangers of radiation, the versatility of magnetism, and the therapeutic nature of sound. The logo sh.webp" alt="Mpita Sense Logo" class="h-16">
         </div>
-    </nav>
-    <div class="container mx-auto p-6 text-center">
-        <h1 class="text-4xl font-bold text-blue-600">Welcome to the Medical Reporter System</h1>
-        <p class="mt-4 text-lg">Choose a portal to continue</p>
-        <form id="contactForm">
-            <input type="email" id="email" placeholder="Enter your email" required>
-            <button type="submit">Send Email</button>
+        <h2 class="text-2xl font-bold text-center text-blue-600 mb-6">Mpita Sense Login</h2>
+        <form id="loginForm">
+            <div class="mb-4">
+                <label for="username" class="block text-gray-800 font-semibold mb-2">Username</label>
+                <input type="text" id="username" name="username" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+            </div>
+            <div class="mb-4">
+                <label for="password" class="block text-gray-800 font-semibold mb-2">Password</label>
+                <input type="password" id="password" name="password" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+            </div>
+            <button type="submit" class="w-full bg-blue-600 text-white p-3 rounded-lg font-semibold hover:bg-blue-700 transition duration-300">Login</button>
         </form>
+        <p class="mt-4 text-center">Don't have an account? <a href="signup.html" class="text-blue-600 font-semibold">Sign Up</a></p>
     </div>
 
     <script>
-        document.getElementById('contactForm').addEventListener('submit', async function(event) {
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
             event.preventDefault();
-            const email = document.getElementById('email').value;
-
-            try {
-                const response = await fetch('/api/send-email', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ to: email, subject: 'Welcome', html: 'Hello, welcome to our service!' })
-                });
-
-                if (response.ok) {
-                    alert('Email sent successfully!');
-                } else {
-                    alert('Failed to send email.');
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                alert('Error sending email.');
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            if (username && password) {
+                window.location.href = 'index.html';
+            } else {
+                alert('Please enter valid credentials');
             }
         });
     </script>
