@@ -1,0 +1,19 @@
+{
+  "name": "your-project-name",
+  "version": "1.0.0",
+  "description": "Your project description",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "dependencies": {
+    "nodemailer": "^6.7.2",
+    "twilio": "^3.70.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^26.0.0",
+    "@types/nodemailer": "^6.4.0",
+    "@types/twilio": "^3.70.0",
+    "jest": "^26.6.0"
+  }
+}
