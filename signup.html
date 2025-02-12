@@ -3,11 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign In - Medical Reporter System</title>
+    <title>Sign In - Mpita Care</title>
     <link rel="stylesheet" href="styles.css"> <!-- Link to CSS file if needed -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <script>
         async function handleSignIn(event) {
             event.preventDefault();
@@ -20,30 +18,32 @@
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({ email, password }),
+                credentials: 'include', // Include credentials for secure sessions
             });
 
             const data = await response.json();
             if (response.ok) {
                 alert('Login successful! Token: ' + data.token);
                 // Redirect or perform further actions
+                window.location.href = 'index.html'; // Redirect to index.html after successful login
             } else {
-                alert('Error: ' + data.error);
+                alert('Error: ' + (data.error || 'An unknown error occurred. Please try again.'));
             }
         }
     </script>
 </head>
-<body class="bg-gray-200 font-roboto">
+<body class="bg-green-200 font-roboto">
+    <nav class="bg-green-600 text-white p-4 flex justify-between">
+        <a href="index.html" class="font-bold">Home</a>
+        <div>
+            <a href="healthstaff.html" class="mx-2">Health Staff</a>
+            <a href="patients.html" class="mx-2">Patients</a>
+            <a href="admin.html" class="mx-2">Administrator</a>
+            <a href="signup.html" class="mx-2">Sign Up</a>
+            <a href="clinic.html" class="mx-2">Hospital/Clinic</a>
+            <a href="signin.html" class="mx-2">Login</a>
+        </div>
+    </nav>
     <div class="container mx-auto p-6 text-center">
         <h1 class="text-4xl font-bold text-blue-600">Sign In</h1>
-        <form onsubmit="handleSignIn(event)" class="mt-4">
-            <label for="email" class="block">Email:</label>
-            <input type="email" id="email" required class="border p-2">
-            <br>
-            <label for="password" class="block mt-2">Password:</label>
-            <input type="password" id="password" required class="border p-2">
-            <br>
-            <button type="submit" class="mt-4 bg-blue-500 text-white py-2 px-4 rounded">Sign In</button>
-        </form>
-    </div>
-</body>
-</html>
+        <form onsubmit="handleSignIn(event)">
