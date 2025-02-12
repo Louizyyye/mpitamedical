@@ -102,54 +102,7 @@
         </div>
     </div>
 
-    <py-script>
-        import requests
-        from bs4 import BeautifulSoup
-        import os
-        import js
-        from pyodide.ffi import to_js
-
-        def save_documents_from_website(url, folder_name):
-            if not os.path.exists(folder_name):
-                os.makedirs(folder_name)
-
-            response = requests.get(url)
-            soup = BeautifulSoup(response.text, 'html.parser')
-
-            for link in soup.find_all('a'):
-                href = link.get('href')
-                if href and (href.endswith('.pdf') or href.endswith('.docx')):
-                    document_url = href if href.startswith('http') else url + href
-                    document_name = os.path.join(folder_name, href.split('/')[-1])
-                    
-                    with requests.get(document_url) as doc_response:
-                        with open(document_name, 'wb') as file:
-                            file.write(doc_response.content)
-                    print(f'Saved: {document_name}')
-
-        def save_report(report_content):
-            blob = js.Blob.new([report_content], { "type": "text/plain" })
-            link = js.document.createElement("a")
-            link.href = js.URL.createObjectURL(blob)
-            link.download = "ultrasound_report.txt"
-            link.click()
-            js.URL.revokeObjectURL(link.href)
-
-        def print_report(report_content):
-            print_window = js.window.open("", "_blank")
-            print_window.document.write(f"<pre>{report_content}</pre>")
-            print_window.document.close()
-            print_window.print()
-
-        def setup_buttons():
-            save_button = js.document.getElementById("saveButton")
-            print_button = js.document.getElementById("printButton")
-            save_button.addEventListener("click", lambda event: save_report(js.document.getElementById("reportContent").textContent))
-            print_button.addEventListener("click", lambda event: print_report(js.document.getElementById("reportContent").textContent))
-
-        js.document.addEventListener("DOMContentLoaded", to_js(setup_buttons))
-    </py-script>
-
+   
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const dateInput = document.getElementById('date');
