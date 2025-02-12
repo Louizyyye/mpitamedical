@@ -20,6 +20,7 @@
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({ email, password }),
+                credentials: 'include', // Include credentials for secure sessions
             });
 
             const data = await response.json();
@@ -27,7 +28,7 @@
                 alert('Login successful! Token: ' + data.token);
                 // Redirect or perform further actions
             } else {
-                alert('Error: ' + data.error);
+                alert('Error: ' + (data.error || 'An unknown error occurred. Please try again.'));
             }
         }
     </script>
@@ -52,10 +53,10 @@
             <h2>Sign In</h2>
             <form onsubmit="handleSignIn(event)">
                 <label for="email">Email:</label>
-                <input type="email" id="email" required>
+                <input type="email" id="email" aria-label="Email" required>
                 <br>
                 <label for="password">Password:</label>
-                <input type="password" id="password" required>
+                <input type="password" id="password" aria-label="Password" required>
                 <br>
                 <button type="submit">Sign In</button>
             </form>
