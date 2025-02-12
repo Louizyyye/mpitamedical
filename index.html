@@ -36,7 +36,18 @@
 
     <script>
         document.getElementById('loginForm').addEventListener('submit', function(event) {
-            event.preventDefault();
+            event.preventDefault(); // Prevent default form submission
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            if (username && password) {
+                // Here you would typically send a request to your server for authentication
+                // For now, we will just simulate a successful login
+                alert('Login successful!'); // Placeholder for successful login
+                window.location.href = 'index.html'; // Redirect to the main page
+            } else {
+                alert('Please enter valid credentials'); // Error message for invalid input
+            }
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
             
