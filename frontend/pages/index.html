@@ -3,135 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Medical Report Generator</title>
+    <title>Medical Reporter System</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body class="bg-gray-200 font-roboto">
-    <div class="container mx-auto p-6">
-        <h1 class="text-4xl font-bold text-center text-blue-600 mb-8">Medical Report Generator</h1>
-        <form id="reportForm" class="bg-white p-8 rounded-lg shadow-lg">
-            <div class="mb-6">
-                <label for="patient_id" class="block text-gray-800 font-semibold mb-2">Patient ID</label>
-                <input type="text" id="patient_id" name="patient_id" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-            </div>
-            <div class="mb-6">
-                <label for="patient_name" class="block text-gray-800 font-semibold mb-2">Patient Name</label>
-                <input type="text" id="patient_name" name="patient_name" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-            </div>
-            <div class="mb-6">
-                <label for="date" class="block text-gray-800 font-semibold mb-2">Date</label>
-                <input type="date" id="date" name="date" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required readonly>
-            </div>
-            <div class="mb-6">
-                  <label for="examination_type" class="block text-gray-800 font-semibold mb-2">Type of Examination</label>
-                <select id="examination_type" name="examination_type" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-                    <option value="" disabled selected>Select Examination Type</option>
-                    <option value="Abdominal Ultrasound">Abdominal Ultrasound</option>
-                    <option value="Pelvic Ultrasound">Pelvic Ultrasound</option>
-                    <option value="Obstetric Ultrasound">Obstetric Ultrasound</option>
-                    <option value="Cardiac Ultrasound">Cardiac Ultrasound</option>
-                    <option value="Vascular Ultrasound">Vascular Ultrasound</option>
-                    <option value="Musculoskeletal Ultrasound">Musculoskeletal Ultrasound</option>
-                    <option value="Thyroid Ultrasound">Thyroid Ultrasound</option>
-                    <option value="KUB (Kidneys, Ureters, Bladder)">KUB (Kidneys, Ureters, Bladder)</option>
-                    <option value="KUBP (Kidneys, Ureters, Bladder, Prostate)">KUBP (Kidneys, Ureters, Bladder, Prostate)</option>
-                    <option value="Doppler Ultrasound">Doppler Ultrasound</option>
-                    <option value="FAST (Focused Assessment with Sonography for Trauma)">FAST (Focused Assessment with Sonography for Trauma)</option>
-                    <option value="Breast Ultrasound">Breast Ultrasound</option>
-                    <option value="Testicular Ultrasound">Testicular Ultrasound</option>
-                    <option value="Transvaginal Ultrasound">Transvaginal Ultrasound</option>
-                    <option value="Transrectal Ultrasound">Transrectal Ultrasound</option>
-                    <option value="Neonatal Cranial Ultrasound">Neonatal Cranial Ultrasound</option>
-                    <option value="Liver Ultrasound">Liver Ultrasound</option>
-                    <option value="Gallbladder Ultrasound">Gallbladder Ultrasound</option>
-                    <option value="Pancreatic Ultrasound">Pancreatic Ultrasound</option>
-                    <option value="Renal Ultrasound">Renal Ultrasound</option>
-                    <option value="Bladder Ultrasound">Bladder Ultrasound</option>
-                    <option value="Prostate Ultrasound">Prostate Ultrasound</option>
-                    <option value="Scrotal Ultrasound">Scrotal Ultrasound</option>
-                    <option value="Thyroid and Parathyroid Ultrasound">Thyroid and Parathyroid Ultrasound</option>
-                    <option value="Carotid Ultrasound">Carotid Ultrasound</option>
-                    <option value="Venous Ultrasound">Venous Ultrasound</option>
-                    <option value="Arterial Ultrasound">Arterial Ultrasound</option>
-                    <option value="Echocardiogram">Echocardiogram</option>
-                    <option value="Transesophageal Echocardiogram">Transesophageal Echocardiogram</option>
-                    <option value="Fetal Echocardiogram">Fetal Echocardiogram</option>
-                    <option value="3D Ultrasound">3D Ultrasound</option>
-                    <option value="4D Ultrasound">4D Ultrasound</option>
-                    <option value="Endoscopic Ultrasound">Endoscopic Ultrasound</option>
-                    <option value="Intravascular Ultrasound">Intravascular Ultrasound</option>
-                    <option value="Elastography">Elastography</option>
-                    <option value="Contrast-Enhanced Ultrasound">Contrast-Enhanced Ultrasound</option>
-                    <option value="Neurosonography">Neurosonography</option>
-                    <option value="Ocular Ultrasound">Ocular Ultrasound</option>
-                    <option value="Penile Ultrasound">Penile Ultrasound</option>
-                    <option value="Salivary Gland Ultrasound">Salivary Gland Ultrasound</option>
-                    <option value="Soft Tissue Ultrasound">Soft Tissue Ultrasound</option>
-                    <option value="Small Parts Ultrasound">Small Parts Ultrasound</option>
-                    <option value="Pediatric Ultrasound">Pediatric Ultrasound</option>
-                    <option value="Neonatal Hip Ultrasound">Neonatal Hip Ultrasound</option>
-                    <option value="Neonatal Spine Ultrasound">Neonatal Spine Ultrasound</option>
-                    <option value="Neonatal Abdominal Ultrasound">Neonatal Abdominal Ultrasound</option>
-                    <option value="Neonatal Cardiac Ultrasound">Neonatal Cardiac Ultrasound</option>
-                    <option value="Neonatal Renal Ultrasound">Neonatal Renal Ultrasound</option>
-                    <option value="Neonatal Cranial Ultrasound">Neonatal Cranial Ultrasound</option>
-                    <option value="Neonatal Lung Ultrasound">Neonatal Lung Ultrasound</option>
-                </select>
-                <label for="examination_type" class="block text-gray-800 font-semibold mb-2">Type of Examination</label>
-                <input type="text" id="examination_type" name="examination_type" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-            </div>
-            <div class="mb-6">
-                <label for="indication" class="block text-gray-800 font-semibold mb-2">Indication of Study</label>
-                <textarea id="indication" name="indication" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" rows="2" required></textarea>
-            </div>
-            <div class="mb-6">
-                <label for="findings" class="block text-gray-800 font-semibold mb-2">Findings</label>
-                <textarea id="findings" name="findings" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" rows="4" required></textarea>
-            </div>
-            <div class="mb-6">
-                <label for="radiographer_name" class="block text-gray-800 font-semibold mb-2">Radiographer Name</label>
-                <input type="text" id="radiographer_name" name="radiographer_name" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-            </div>
-            <button type="submit" class="w-full bg-blue-600 text-white p-3 rounded-lg font-semibold hover:bg-blue-700 transition duration-300">Generate Report</button>
-        </form>
-        <div id="reportOutput" class="mt-8 bg-white p-8 rounded-lg shadow-lg hidden">
-            <h2 class="text-2xl font-bold mb-4">Generated Report</h2>
-            <pre id="reportContent" class="whitespace-pre-wrap"></pre>
+    <nav class="bg-blue-600 text-white p-4 flex justify-between">
+        <a href="index.html" class="font-bold">Home</a>
+        <div>
+            <a href="healthstaff.html" class="mx-2">Health Staff</a>
+            <a href="patients.html" class="mx-2">Patients</a>
+            <a href="admin.html" class="mx-2">Administrator</a>
+            <a href="clinic.html" class="mx-2">Hospital/Clinic</a>
+            <a href="login.html" class="mx-2">Login</a>
         </div>
+    </nav>
+    <div class="container mx-auto p-6 text-center">
+        <h1 class="text-4xl font-bold text-blue-600">Welcome to the Medical Reporter System</h1>
+        <p class="mt-4 text-lg">Choose a portal to continue</p>
     </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const dateInput = document.getElementById('date');
-            const today = new Date().toISOString().split('T')[0];
-            dateInput.value = today;
-        });
-
-        document.getElementById('reportForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const patientId = document.getElementById('patient_id').value;
-            const patientName = document.getElementById('patient_name').value;
-            const date = document.getElementById('date').value;
-            const examinationType = document.getElementById('examination_type').value;
-            const indication = document.getElementById('indication').value;
-            const findings = document.getElementById('findings').value;
-            const radiographerName = document.getElementById('radiographer_name').value;
-
-            const report = {
-                patient_id: patientId,
-                patient_name: patientName,
-                date: date,
-                examination_type: examinationType,
-                indication: indication,
-                findings: findings,
-                radiographer_name: radiographerName
-            };
-
-            document.getElementById('reportContent').textContent = JSON.stringify(report, null, 2);
-            document.getElementById('reportOutput').classList.remove('hidden');
-        });
-    </script>
 </body>
 </html>
