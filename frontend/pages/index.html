@@ -1,113 +1,83 @@
-// Backend: Express.js (Node.js) + MongoDB API
-// File: backend/server.js
-
-const express = require('express');
-const mongoose = require('mongoose');
-const cors = require('cors');
-
-const app = express();
-app.use(express.json());
-app.use(cors());
-
-mongoose.connect('mongodb://localhost:27017/medical-reports', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-});
-
-const ReportSchema = new mongoose.Schema({
-    patient_id: String,
-    patient_name: String,
-    date: String,
-    examination_type: String,
-    indication: String,
-    findings: String,
-    radiographer_name: String
-});
-const Report = mongoose.model('Report', ReportSchema);
-
-app.post('/reports', async (req, res) => {
-    const report = new Report(req.body);
-    await report.save();
-    res.json({ message: 'Report saved!' });
-});
-
-app.get('/reports', async (req, res) => {
-    const reports = await Report.find();
-    res.json(reports);
-});
-
-app.listen(5000, () => console.log('Server running on port 5000'));
-
-
-// Frontend: Next.js + TailwindCSS
-// File: frontend/pages/index.js
-
-import { useState } from 'react';
-
-export default function Home() {
-    const [form, setForm] = useState({ patient_id: '', patient_name: '', date: new Date().toISOString().split('T')[0], examination_type: '', indication: '', findings: '', radiographer_name: '' });
-    const [report, setReport] = useState(null);
-
-    const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        const res = await fetch('http://localhost:5000/reports', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(form)
-        });
-        if (res.ok) setReport(form);
-    };
-
-    return (
-        <div className="container mx-auto p-6">
-            <h1 className="text-3xl font-bold text-center text-blue-600 mb-6">Medical Reporter</h1>
-            <form className="bg-white p-6 rounded-lg shadow-lg" onSubmit={handleSubmit}>
-                <input type="text" name="patient_id" placeholder="Patient ID" className="w-full p-2 border" onChange={handleChange} required />
-                <input type="text" name="patient_name" placeholder="Patient Name" className="w-full p-2 border mt-4" onChange={handleChange} required />
-                <input type="date" name="date" className="w-full p-2 border mt-4" value={form.date} readOnly />
-                <textarea name="indication" placeholder="Indication of Study" className="w-full p-2 border mt-4" onChange={handleChange} required></textarea>
-                <textarea name="findings" placeholder="Findings" className="w-full p-2 border mt-4" onChange={handleChange} required></textarea>
-                <input type="text" name="radiographer_name" placeholder="Radiographer Name" className="w-full p-2 border mt-4" onChange={handleChange} required />
-                <button type="submit" className="w-full bg-blue-600 text-white p-2 mt-4">Generate Report</button>
-            </form>
-            {report && <pre className="mt-6 p-4 bg-gray-100">{JSON.stringify(report, null, 2)}</pre>}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Report Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-200 font-roboto">
+    <div class="container mx-auto p-6">
+        <h1 class="text-4xl font-bold text-center text-blue-600 mb-8">Medical Report Generator</h1>
+        <form id="reportForm" class="bg-white p-8 rounded-lg shadow-lg">
+            <div class="mb-6">
+                <label for="patient_id" class="block text-gray-800 font-semibold mb-2">Patient ID</label>
+                <input type="text" id="patient_id" name="patient_id" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+            </div>
+            <div class="mb-6">
+                <label for="patient_name" class="block text-gray-800 font-semibold mb-2">Patient Name</label>
+                <input type="text" id="patient_name" name="patient_name" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+            </div>
+            <div class="mb-6">
+                <label for="date" class="block text-gray-800 font-semibold mb-2">Date</label>
+                <input type="date" id="date" name="date" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required readonly>
+            </div>
+            <div class="mb-6">
+                <label for="examination_type" class="block text-gray-800 font-semibold mb-2">Type of Examination</label>
+                <input type="text" id="examination_type" name="examination_type" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+            </div>
+            <div class="mb-6">
+                <label for="indication" class="block text-gray-800 font-semibold mb-2">Indication of Study</label>
+                <textarea id="indication" name="indication" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" rows="2" required></textarea>
+            </div>
+            <div class="mb-6">
+                <label for="findings" class="block text-gray-800 font-semibold mb-2">Findings</label>
+                <textarea id="findings" name="findings" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" rows="4" required></textarea>
+            </div>
+            <div class="mb-6">
+                <label for="radiographer_name" class="block text-gray-800 font-semibold mb-2">Radiographer Name</label>
+                <input type="text" id="radiographer_name" name="radiographer_name" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+            </div>
+            <button type="submit" class="w-full bg-blue-600 text-white p-3 rounded-lg font-semibold hover:bg-blue-700 transition duration-300">Generate Report</button>
+        </form>
+        <div id="reportOutput" class="mt-8 bg-white p-8 rounded-lg shadow-lg hidden">
+            <h2 class="text-2xl font-bold mb-4">Generated Report</h2>
+            <pre id="reportContent" class="whitespace-pre-wrap"></pre>
         </div>
-    );
-}
+    </div>
 
-
-// React Native (Expo) - Mobile App
-// File: mobile/App.js
-
-import React, { useState } from 'react';
-import { View, Text, TextInput, Button, ScrollView } from 'react-native';
-
-export default function App() {
-    const [form, setForm] = useState({ patient_id: '', patient_name: '', date: new Date().toISOString().split('T')[0], examination_type: '', indication: '', findings: '', radiographer_name: '' });
-    const [report, setReport] = useState(null);
-
-    const handleChange = (key, value) => setForm({ ...form, [key]: value });
-    const handleSubmit = async () => {
-        const res = await fetch('http://localhost:5000/reports', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(form)
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const dateInput = document.getElementById('date');
+            const today = new Date().toISOString().split('T')[0];
+            dateInput.value = today;
         });
-        if (res.ok) setReport(form);
-    };
 
-    return (
-        <ScrollView style={{ padding: 20 }}>
-            <Text style={{ fontSize: 24, fontWeight: 'bold', textAlign: 'center' }}>Medical Reporter</Text>
-            <TextInput placeholder="Patient ID" onChangeText={(value) => handleChange('patient_id', value)} style={{ borderBottomWidth: 1, marginTop: 10 }} />
-            <TextInput placeholder="Patient Name" onChangeText={(value) => handleChange('patient_name', value)} style={{ borderBottomWidth: 1, marginTop: 10 }} />
-            <TextInput placeholder="Indication" onChangeText={(value) => handleChange('indication', value)} style={{ borderBottomWidth: 1, marginTop: 10 }} />
-            <TextInput placeholder="Findings" onChangeText={(value) => handleChange('findings', value)} style={{ borderBottomWidth: 1, marginTop: 10 }} />
-            <TextInput placeholder="Radiographer Name" onChangeText={(value) => handleChange('radiographer_name', value)} style={{ borderBottomWidth: 1, marginTop: 10 }} />
-            <Button title="Generate Report" onPress={handleSubmit} />
-            {report && <Text style={{ marginTop: 20 }}>{JSON.stringify(report, null, 2)}</Text>}
-        </ScrollView>
-    );
-}
+        document.getElementById('reportForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const patientId = document.getElementById('patient_id').value;
+            const patientName = document.getElementById('patient_name').value;
+            const date = document.getElementById('date').value;
+            const examinationType = document.getElementById('examination_type').value;
+            const indication = document.getElementById('indication').value;
+            const findings = document.getElementById('findings').value;
+            const radiographerName = document.getElementById('radiographer_name').value;
 
+            const report = {
+                patient_id: patientId,
+                patient_name: patientName,
+                date: date,
+                examination_type: examinationType,
+                indication: indication,
+                findings: findings,
+                radiographer_name: radiographerName
+            };
+
+            document.getElementById('reportContent').textContent = JSON.stringify(report, null, 2);
+            document.getElementById('reportOutput').classList.remove('hidden');
+        });
+    </script>
+</body>
+</html>
