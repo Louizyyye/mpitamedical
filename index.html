@@ -1,16 +1,16 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ultrasound Report Generator</title>
+    <title>Medical Report Generator</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <script defer src="https://pyscript.net/latest/pyscript.js"></script>
 </head>
 <body class="bg-gray-200 font-roboto">
     <div class="container mx-auto p-6">
-        <h1 class="text-4xl font-bold text-center text-blue-600 mb-8">Ultrasound Report Generator</h1>
+        <h1 class="text-4xl font-bold text-center text-blue-600 mb-8">Medical Report Generator</h1>
         <form id="reportForm" class="bg-white p-8 rounded-lg shadow-lg">
             <div class="mb-6">
                 <label for="patient_id" class="block text-gray-800 font-semibold mb-2">Patient ID</label>
@@ -25,7 +25,7 @@
                 <input type="date" id="date" name="date" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required readonly>
             </div>
             <div class="mb-6">
-                <label for="examination_type" class="block text-gray-800 font-semibold mb-2">Type of Examination</label>
+                  <label for="examination_type" class="block text-gray-800 font-semibold mb-2">Type of Examination</label>
                 <select id="examination_type" name="examination_type" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
                     <option value="" disabled selected>Select Examination Type</option>
                     <option value="Abdominal Ultrasound">Abdominal Ultrasound</option>
@@ -79,6 +79,8 @@
                     <option value="Neonatal Cranial Ultrasound">Neonatal Cranial Ultrasound</option>
                     <option value="Neonatal Lung Ultrasound">Neonatal Lung Ultrasound</option>
                 </select>
+                <label for="examination_type" class="block text-gray-800 font-semibold mb-2">Type of Examination</label>
+                <input type="text" id="examination_type" name="examination_type" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
             </div>
             <div class="mb-6">
                 <label for="indication" class="block text-gray-800 font-semibold mb-2">Indication of Study</label>
@@ -97,12 +99,9 @@
         <div id="reportOutput" class="mt-8 bg-white p-8 rounded-lg shadow-lg hidden">
             <h2 class="text-2xl font-bold mb-4">Generated Report</h2>
             <pre id="reportContent" class="whitespace-pre-wrap"></pre>
-            <button id="saveButton" class="w-full bg-green-600 text-white p-3 rounded-lg font-semibold mt-4 hover:bg-green-700 transition duration-300">Save Report</button>
-            <button id="printButton" class="w-full bg-yellow-600 text-white p-3 rounded-lg font-semibold mt-4 hover:bg-yellow-700 transition duration-300">Print Report</button>
         </div>
     </div>
 
-   
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const dateInput = document.getElementById('date');
