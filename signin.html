@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In - Medical Reporter System</title>
+    <script>
+        async function handleSignIn(event) {
+            event.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            const response = await fetch('/api/auth/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email, password }),
+            });
+
+            const data = await response.json();
+            if (response.ok) {
+                alert('Login successful! Token: ' + data.token);
+                // Redirect or perform further actions
+            } else {
+                alert('Error: ' + data.error);
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Sign In</h1>
+    <form onsubmit="handleSignIn(event)">
+        <label for="email">Email:</label>
+        <input type="email" id="email" required>
+        <br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" required>
+        <br>
+        <button type="submit">Sign In</button>
+    </form>
+</body>
+</html>
