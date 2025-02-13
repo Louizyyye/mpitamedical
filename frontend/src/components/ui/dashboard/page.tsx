@@ -1,10 +1,18 @@
 import React from 'react';
 
-const Dashboard: React.FC = () => {
+interface DashboardProps {
+  user: {
+    name: string;
+    role: string;
+  };
+}
+
+const Dashboard: React.FC<DashboardProps> = ({ user }) => {
   return (
     <div>
       <h1>Dashboard</h1>
-      <p>Welcome to the Dashboard!</p>
+      <p>Welcome to the Dashboard, {user.name}!</p>
+      <p>Your role: {user.role}</p>
     </div>
   );
 };
