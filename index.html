@@ -5,16 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mpita Care</title>
     <link rel="stylesheet" href="styles.css"> <!-- Link to CSS file if needed -->
-     <style>
+    <style>
         body {
-            
-            background-color: #ffcc00; /* New vibrant background color */
-            font-family: 'Roboto', sans-serif; /* New modern font family */
-            background-image: url('DALL·E 2025-02-12 22.53.'); /* Update with the correct path */
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
+            background-color: #b2ebf2; /* Updated to a lighter calming background color */
+            font-family: 'Roboto', sans-serif; /* Modern font family */
+        }
+        h1 {
+            color: #00695c; /* Updated heading color for better visibility */
+        }
+        p {
+            color: #333; /* Updated paragraph color for improved readability */
+        }
+        nav {
+            background-color: #00796b; /* Updated navigation background color */
+        }
+        nav a {
+            color: #e0f7fa; /* Updated navigation link color for better contrast */
         }
     </style>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -60,9 +66,8 @@
     <div class="container mx-auto p-6 text-center">
         <h1 class="text-4xl font-bold text-gold-600">Welcome to Mpita Medical Care System</h1>
         <p class="mt-4 text-lg">Choose a portal to continue</p>
-        <button onclick="document.getElementById('signin-form').style.display='block'" class="mt-4 bg-blue-500 text-white py-2 px-4 rounded">Sign In</button> <!-- Sign In button -->
+        <button onclick="document.getElementById('signin-form').style.display='block'" class="mt-4 bg-teal-500 text-white py-2 px-4 rounded">Sign In</button> <!-- Sign In button -->
         <div id="signin-form" style="display:none;">
-        
             <h2>Sign In</h2>
             <form onsubmit="handleSignIn(event)">
                 <label for="email">Email:</label>
@@ -71,7 +76,7 @@
                 <label for="password">Password:</label>
                 <input type="password" id="password" aria-label="Password" required>
                 <br>
-                <button type="submit">Sign In</button>
+                <button type="submit" class="bg-teal-600 text-white py-2 px-4 rounded">Sign In</button>
             </form>
         </div>
     </div>
