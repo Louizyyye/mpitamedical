@@ -1,0 +1,185 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ultrasound Report Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"></link>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <script defer src="https://pyscript.net/latest/pyscript.js"></script>
+</head>
+<body class="bg-gray-200 font-roboto">
+    <div class="container mx-auto p-6">
+        <h1 class="text-4xl font-bold text-center text-blue-600 mb-8">Ultrasound Report Generator</h1>
+        <form id="reportForm" class="bg-white p-8 rounded-lg shadow-lg">
+            <div class="mb-6">
+                <label for="patient_id" class="block text-gray-800 font-semibold mb-2">Patient ID</label>
+                <input type="text" id="patient_id" name="patient_id" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+            </div>
+            <div class="mb-6">
+                <label for="patient_name" class="block text-gray-800 font-semibold mb-2">Patient Name</label>
+                <input type="text" id="patient_name" name="patient_name" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+            </div>
+            <div class="mb-6">
+                <label for="date" class="block text-gray-800 font-semibold mb-2">Date</label>
+                <input type="date" id="date" name="date" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required readonly>
+            </div>
+            <div class="mb-6">
+                <label for="examination_type" class="block text-gray-800 font-semibold mb-2">Type of Examination</label>
+                <select id="examination_type" name="examination_type" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                    <option value="" disabled selected>Select Examination Type</option>
+                    <option value="Abdominal Ultrasound">Abdominal Ultrasound</option>
+                    <option value="Pelvic Ultrasound">Pelvic Ultrasound</option>
+                    <option value="Obstetric Ultrasound">Obstetric Ultrasound</option>
+                    <option value="Cardiac Ultrasound">Cardiac Ultrasound</option>
+                    <option value="Vascular Ultrasound">Vascular Ultrasound</option>
+                    <option value="Musculoskeletal Ultrasound">Musculoskeletal Ultrasound</option>
+                    <option value="Thyroid Ultrasound">Thyroid Ultrasound</option>
+                    <option value="KUB (Kidneys, Ureters, Bladder)">KUB (Kidneys, Ureters, Bladder)</option>
+                    <option value="KUBP (Kidneys, Ureters, Bladder, Prostate)">KUBP (Kidneys, Ureters, Bladder, Prostate)</option>
+                    <option value="Doppler Ultrasound">Doppler Ultrasound</option>
+                    <option value="FAST (Focused Assessment with Sonography for Trauma)">FAST (Focused Assessment with Sonography for Trauma)</option>
+                    <option value="Breast Ultrasound">Breast Ultrasound</option>
+                    <option value="Testicular Ultrasound">Testicular Ultrasound</option>
+                    <option value="Transvaginal Ultrasound">Transvaginal Ultrasound</option>
+                    <option value="Transrectal Ultrasound">Transrectal Ultrasound</option>
+                    <option value="Neonatal Cranial Ultrasound">Neonatal Cranial Ultrasound</option>
+                    <option value="Liver Ultrasound">Liver Ultrasound</option>
+                    <option value="Gallbladder Ultrasound">Gallbladder Ultrasound</option>
+                    <option value="Pancreatic Ultrasound">Pancreatic Ultrasound</option>
+                    <option value="Renal Ultrasound">Renal Ultrasound</option>
+                    <option value="Bladder Ultrasound">Bladder Ultrasound</option>
+                    <option value="Prostate Ultrasound">Prostate Ultrasound</option>
+                    <option value="Scrotal Ultrasound">Scrotal Ultrasound</option>
+                    <option value="Thyroid and Parathyroid Ultrasound">Thyroid and Parathyroid Ultrasound</option>
+                    <option value="Carotid Ultrasound">Carotid Ultrasound</option>
+                    <option value="Venous Ultrasound">Venous Ultrasound</option>
+                    <option value="Arterial Ultrasound">Arterial Ultrasound</option>
+                    <option value="Echocardiogram">Echocardiogram</option>
+                    <option value="Transesophageal Echocardiogram">Transesophageal Echocardiogram</option>
+                    <option value="Fetal Echocardiogram">Fetal Echocardiogram</option>
+                    <option value="3D Ultrasound">3D Ultrasound</option>
+                    <option value="4D Ultrasound">4D Ultrasound</option>
+                    <option value="Endoscopic Ultrasound">Endoscopic Ultrasound</option>
+                    <option value="Intravascular Ultrasound">Intravascular Ultrasound</option>
+                    <option value="Elastography">Elastography</option>
+                    <option value="Contrast-Enhanced Ultrasound">Contrast-Enhanced Ultrasound</option>
+                    <option value="Neurosonography">Neurosonography</option>
+                    <option value="Ocular Ultrasound">Ocular Ultrasound</option>
+                    <option value="Penile Ultrasound">Penile Ultrasound</option>
+                    <option value="Salivary Gland Ultrasound">Salivary Gland Ultrasound</option>
+                    <option value="Soft Tissue Ultrasound">Soft Tissue Ultrasound</option>
+                    <option value="Small Parts Ultrasound">Small Parts Ultrasound</option>
+                    <option value="Pediatric Ultrasound">Pediatric Ultrasound</option>
+                    <option value="Neonatal Hip Ultrasound">Neonatal Hip Ultrasound</option>
+                    <option value="Neonatal Spine Ultrasound">Neonatal Spine Ultrasound</option>
+                    <option value="Neonatal Abdominal Ultrasound">Neonatal Abdominal Ultrasound</option>
+                    <option value="Neonatal Cardiac Ultrasound">Neonatal Cardiac Ultrasound</option>
+                    <option value="Neonatal Renal Ultrasound">Neonatal Renal Ultrasound</option>
+                    <option value="Neonatal Cranial Ultrasound">Neonatal Cranial Ultrasound</option>
+                    <option value="Neonatal Lung Ultrasound">Neonatal Lung Ultrasound</option>
+                </select>
+            </div>
+            <div class="mb-6">
+                <label for="indication" class="block text-gray-800 font-semibold mb-2">Indication of Study</label>
+                <textarea id="indication" name="indication" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" rows="2" required></textarea>
+            </div>
+            <div class="mb-6">
+                <label for="findings" class="block text-gray-800 font-semibold mb-2">Findings</label>
+                <textarea id="findings" name="findings" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" rows="4" required></textarea>
+            </div>
+            <div class="mb-6">
+                <label for="radiographer_name" class="block text-gray-800 font-semibold mb-2">Radiographer Name</label>
+                <input type="text" id="radiographer_name" name="radiographer_name" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+            </div>
+            <button type="submit" class="w-full bg-blue-600 text-white p-3 rounded-lg font-semibold hover:bg-blue-700 transition duration-300">Generate Report</button>
+        </form>
+        <div id="reportOutput" class="mt-8 bg-white p-8 rounded-lg shadow-lg hidden">
+            <h2 class="text-2xl font-bold mb-4">Generated Report</h2>
+            <pre id="reportContent" class="whitespace-pre-wrap"></pre>
+            <button id="saveButton" class="w-full bg-green-600 text-white p-3 rounded-lg font-semibold mt-4 hover:bg-green-700 transition duration-300">Save Report</button>
+            <button id="printButton" class="w-full bg-yellow-600 text-white p-3 rounded-lg font-semibold mt-4 hover:bg-yellow-700 transition duration-300">Print Report</button>
+        </div>
+    </div>
+
+    <py-script>
+        import requests
+        from bs4 import BeautifulSoup
+        import os
+        import js
+        from pyodide.ffi import to_js
+
+        def save_documents_from_website(url, folder_name):
+            if not os.path.exists(folder_name):
+                os.makedirs(folder_name)
+
+            response = requests.get(url)
+            soup = BeautifulSoup(response.text, 'html.parser')
+
+            for link in soup.find_all('a'):
+                href = link.get('href')
+                if href and (href.endswith('.pdf') or href.endswith('.docx')):
+                    document_url = href if href.startswith('http') else url + href
+                    document_name = os.path.join(folder_name, href.split('/')[-1])
+                    
+                    with requests.get(document_url) as doc_response:
+                        with open(document_name, 'wb') as file:
+                            file.write(doc_response.content)
+                    print(f'Saved: {document_name}')
+
+        def save_report(report_content):
+            blob = js.Blob.new([report_content], { "type": "text/plain" })
+            link = js.document.createElement("a")
+            link.href = js.URL.createObjectURL(blob)
+            link.download = "ultrasound_report.txt"
+            link.click()
+            js.URL.revokeObjectURL(link.href)
+
+        def print_report(report_content):
+            print_window = js.window.open("", "_blank")
+            print_window.document.write(f"<pre>{report_content}</pre>")
+            print_window.document.close()
+            print_window.print()
+
+        def setup_buttons():
+            save_button = js.document.getElementById("saveButton")
+            print_button = js.document.getElementById("printButton")
+            save_button.addEventListener("click", lambda event: save_report(js.document.getElementById("reportContent").textContent))
+            print_button.addEventListener("click", lambda event: print_report(js.document.getElementById("reportContent").textContent))
+
+        js.document.addEventListener("DOMContentLoaded", to_js(setup_buttons))
+    </py-script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const dateInput = document.getElementById('date');
+            const today = new Date().toISOString().split('T')[0];
+            dateInput.value = today;
+        });
+
+        document.getElementById('reportForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const patientId = document.getElementById('patient_id').value;
+            const patientName = document.getElementById('patient_name').value;
+            const date = document.getElementById('date').value;
+            const examinationType = document.getElementById('examination_type').value;
+            const indication = document.getElementById('indication').value;
+            const findings = document.getElementById('findings').value;
+            const radiographerName = document.getElementById('radiographer_name').value;
+
+            const report = {
+                patient_id: patientId,
+                patient_name: patientName,
+                date: date,
+                examination_type: examinationType,
+                indication: indication,
+                findings: findings,
+                radiographer_name: radiographerName
+            };
+
+            document.getElementById('reportContent').textContent = JSON.stringify(report, null, 2);
+            document.getElementById('reportOutput').classList.remove('hidden');
+        });
+    </script>
+</body>
+</html>
